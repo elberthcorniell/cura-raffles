@@ -69,8 +69,8 @@ const RaffleCard = ({
         {/* Price and Time */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Ticket className="w-4 h-4 text-white" />
-            <span className="font-bold text-lg text-white">
+            <Ticket className="w-4 h-4 text-foreground" />
+            <span className="font-bold text-lg text-foreground">
               RD${ticketPrice.toLocaleString()}
             </span>
             <span className="text-sm text-muted-foreground">por boleto</span>

@@ -4,47 +4,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Raffle Platform Design System - Colors MUST be HSL */
+/* Cura tu Suerte Design System - Colors MUST be HSL */
 
 @layer base {
   :root {
-    /* Brand Colors */
-    --primary: 0 0% 0%; /* Pure Black #000000 */
+    /* Brand Colors - Deep Navy + Electric Blue */
+    --primary: 216 72% 16%; /* Deep Navy #0B2447 */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 0 0% 15%;
+    --primary-glow: 216 60% 25%;
 
-    --secondary: 58 97% 48%; /* Yellow #f0e904 */
-    --secondary-foreground: 0 0% 0%;
-    --secondary-glow: 58 97% 65%;
+    --secondary: 210 75% 46%; /* Electric Blue #1976D2 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 210 89% 61%; /* Lighter Blue #42A5F5 */
 
-    /* Background System */
-    --background: 0 0% 0%; /* Pure Black #000000 */
-    --background-alt: 0 0% 5%;
-    --foreground: 0 0% 100%;
+    /* Background System - Light */
+    --background: 0 0% 100%; /* White */
+    --background-alt: 216 33% 97%; /* Very Light Gray #F5F7FA */
+    --foreground: 216 72% 16%; /* Deep Navy */
 
     /* Card System */
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 100%;
-    --card-border: 0 0% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 216 72% 16%;
+    --card-border: 216 20% 90%;
 
     /* Interactive Elements */
-    --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 100%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
+    --accent: 210 80% 95%;
+    --accent-foreground: 216 72% 16%;
+    --muted: 216 20% 96%;
+    --muted-foreground: 216 16% 47%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 72% 16%;
 
     /* Status Colors */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
-    --warning: 58 97% 48%; /* Yellow #f0e904 */
-    --warning-foreground: 222 84% 5%;
+    --warning: 43 74% 49%; /* Gold #DAA520 */
+    --warning-foreground: 216 72% 16%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* UI Elements */
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 58 97% 48%;
+    --border: 216 20% 90%;
+    --input: 216 20% 90%;
+    --ring: 210 75% 46%;
     --radius: 0.75rem;
 
     /* Gradients */
@@ -60,7 +64,7 @@
     );
     --gradient-hero: radial-gradient(
       ellipse at center,
-      hsl(var(--primary) / 0.1),
+      hsl(var(--secondary) / 0.08),
       transparent 70%
     );
     --gradient-card: linear-gradient(
@@ -70,68 +74,55 @@
     );
 
     /* Shadows */
-    --shadow-primary: 0 10px 30px -10px hsl(var(--primary) / 0.3);
-    --shadow-secondary: 0 10px 30px -10px hsl(var(--secondary) / 0.3);
-    --shadow-elegant: 0 20px 60px -20px hsl(var(--primary) / 0.15);
-    --shadow-glow: 0 0 40px hsl(var(--secondary-glow) / 0.4);
+    --shadow-primary: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-secondary: 0 10px 30px -10px hsl(var(--secondary) / 0.25);
+    --shadow-elegant: 0 20px 60px -20px hsl(var(--primary) / 0.12);
+    --shadow-glow: 0 0 40px hsl(var(--secondary-glow) / 0.3);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --sidebar-background: 0 0% 0%;
-
-    --sidebar-foreground: 0 0% 100%;
-
-    --sidebar-primary: 58 97% 48%;
-
-    --sidebar-primary-foreground: 0 0% 0%;
-
-    --sidebar-accent: 0 0% 10%;
-
-    --sidebar-accent-foreground: 0 0% 100%;
-
-    --sidebar-border: 0 0% 20%;
-
-    --sidebar-ring: 58 97% 48%;
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 216 72% 16%;
+    --sidebar-primary: 210 75% 46%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 80% 95%;
+    --sidebar-accent-foreground: 216 72% 16%;
+    --sidebar-border: 216 20% 90%;
+    --sidebar-ring: 210 75% 46%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 216 72% 8%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
+    --card: 216 72% 10%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
+    --card-border: 216 40% 20%;
+    --popover: 216 72% 10%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
+    --primary-foreground: 216 72% 16%;
+    --secondary: 210 75% 46%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 216 40% 18%;
+    --muted-foreground: 216 20% 65%;
+    --accent: 216 40% 18%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 216 40% 20%;
+    --input: 216 40% 20%;
+    --ring: 210 75% 46%;
+    --sidebar-background: 216 72% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 75% 46%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 216 40% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 216 40% 20%;
+    --sidebar-ring: 210 75% 46%;
   }
 }
 
@@ -153,7 +144,6 @@
 }
 
 @layer components {
-  /* Star animations for celebration effect */
   .stars-container {
     position: fixed;
     top: 0;
@@ -223,7 +213,6 @@
   }
 }
 
-/* Keyframes */
 @keyframes twinkle {
   0%,
   100% {
@@ -234,4 +223,41 @@
     opacity: 1;
     transform: scale(1.2);
   }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.animate-fade-in-up-delayed {
+  animation: fadeInUp 0.7s ease-out 0.2s both;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 3s infinite;
 }

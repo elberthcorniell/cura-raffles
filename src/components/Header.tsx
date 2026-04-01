@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import logoImage from "@/assets/rifa-mora-motors-logo.png";
 import { Menu, Ticket } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
-import { getImageSrc } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { BRAND } from "@/lib/constants";
 
 const Header = () => {
   const router = useRouter();
@@ -18,13 +17,13 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background/80 backdrop-blur-md border-b border-card-border sticky top-0 z-50">
+    <header className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         {/* Mobile Layout */}
         <div className="flex items-center justify-between md:hidden">
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white">
+              <Button variant="ghost" size="icon" className="text-foreground">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
@@ -47,8 +46,8 @@ const Header = () => {
           {/* Mobile Logo */}
           <div className="flex-1 flex justify-center">
             <img 
-              src={getImageSrc(logoImage)} 
-              alt="Rifas Mora Motors Logo" 
+              src="/logo.jpg"
+              alt={`${BRAND.name} Logo`}
               className="h-20 w-auto animate-fade-in"
             />
           </div>
@@ -65,8 +64,8 @@ const Header = () => {
           {/* Centered Logo */}
           <div className="flex justify-center items-center flex-1">
             <img 
-              src={getImageSrc(logoImage)} 
-              alt="Rifas Mora Motors Logo" 
+              src="/logo.jpg"
+              alt={`${BRAND.name} Logo`}
               className="h-16 w-auto animate-fade-in"
             />
           </div>

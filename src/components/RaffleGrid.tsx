@@ -91,7 +91,7 @@ const RaffleGrid = () => {
     <section id="rifas" className="py-16 bg-background-alt pb-24 md:pb-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Rifas Activas
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -148,7 +148,7 @@ const RaffleGrid = () => {
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle className="text-xl font-bold text-white">
+                <DialogTitle className="text-xl font-bold text-foreground">
                   ¿Qué producto te gustaría ver rifado?
                 </DialogTitle>
               </DialogHeader>

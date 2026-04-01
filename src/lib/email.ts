@@ -1,14 +1,14 @@
 import sgMail from '@sendgrid/mail'
+import { BRAND } from '@/lib/constants'
 
-// Initialize SendGrid with API key
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
-const FROM_EMAIL_ADDRESS = process.env.SENDGRID_FROM_EMAIL || 'noreply@rifasmoramotors.com'
-const FROM_NAME = process.env.SENDGRID_FROM_NAME || 'Rifas Mora Motors'
+const FROM_EMAIL_ADDRESS = process.env.SENDGRID_FROM_EMAIL || `noreply@${BRAND.domain}`
+const FROM_NAME = process.env.SENDGRID_FROM_NAME || BRAND.name
 const FROM_EMAIL = {
   email: FROM_EMAIL_ADDRESS,
   name: FROM_NAME
 }
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'Rifasmoramotors@gmail.com'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || BRAND.email
 
 if (SENDGRID_API_KEY) {
   sgMail.setApiKey(SENDGRID_API_KEY)
@@ -49,10 +49,6 @@ interface PaymentApprovedEmailData {
   approvedAt: string
 }
 
-/**
- * Sends an email notification when a purchase is submitted
- * This notifies the admin that a new purchase voucher needs verification
- */
 export async function sendPurchaseSubmittedEmail(data: PurchaseSubmittedEmailData): Promise<boolean> {
   if (!SENDGRID_API_KEY) {
     console.warn('SENDGRID_API_KEY is not configured. Skipping email notification.')
@@ -87,75 +83,75 @@ export async function sendPurchaseSubmittedEmail(data: PurchaseSubmittedEmailDat
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f4f8;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(11, 36, 71, 0.1);">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #2c3e50; margin: 0; font-size: 24px;">🎟️ Nueva Compra Pendiente</h1>
-              <p style="color: #7f8c8d; margin-top: 10px;">Se ha recibido un nuevo comprobante de pago</p>
+              <h1 style="color: #0B2447; margin: 0; font-size: 24px;">🎟️ Nueva Compra Pendiente</h1>
+              <p style="color: #64748b; margin-top: 10px;">Se ha recibido un nuevo comprobante de pago</p>
             </div>
             
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Detalles del Cliente</h2>
+            <div style="background-color: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #0B2447; margin-top: 0; font-size: 18px; border-bottom: 2px solid #1976D2; padding-bottom: 10px;">Detalles del Cliente</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d; width: 140px;">Nombre:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${customerName}</td>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;">Nombre:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${customerName}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">WhatsApp:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">
+                  <td style="padding: 8px 0; color: #64748b;">WhatsApp:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">
                     <a href="https://wa.me/${customerWhatsapp.replace(/\+/g, '')}" style="color: #25d366; text-decoration: none;">${customerWhatsapp}</a>
                   </td>
                 </tr>
               </table>
             </div>
             
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Detalles de la Compra</h2>
+            <div style="background-color: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #0B2447; margin-top: 0; font-size: 18px; border-bottom: 2px solid #1976D2; padding-bottom: 10px;">Detalles de la Compra</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d; width: 140px;">Orden ID:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">#${purchaseId}</td>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;">Orden ID:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">#${purchaseId}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Rifa ID:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${raffleId}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Rifa ID:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${raffleId}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Cantidad de Boletos:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${ticketQuantity}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Cantidad de Boletos:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${ticketQuantity}</td>
                 </tr>
                 ${ticketNumbers && ticketNumbers.length > 0 ? `
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Números:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${ticketNumbers.join(', ')}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Números:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${ticketNumbers.join(', ')}</td>
                 </tr>
                 ` : ''}
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Monto Total:</td>
+                  <td style="padding: 8px 0; color: #64748b;">Monto Total:</td>
                   <td style="padding: 8px 0; color: #27ae60; font-weight: bold; font-size: 18px;">RD$ ${totalAmount.toLocaleString('es-DO')}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Fecha:</td>
-                  <td style="padding: 8px 0; color: #2c3e50;">${formattedDate}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Fecha:</td>
+                  <td style="padding: 8px 0; color: #0B2447;">${formattedDate}</td>
                 </tr>
               </table>
             </div>
             
             ${voucherUrl ? `
             <div style="text-align: center; margin: 30px 0;">
-              <a href="${voucherUrl}" style="display: inline-block; background-color: #3498db; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">Ver Comprobante</a>
+              <a href="${voucherUrl}" style="display: inline-block; background-color: #1976D2; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">Ver Comprobante</a>
             </div>
             ` : ''}
             
-            <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #DAA520;">
               <p style="margin: 0; color: #856404; font-size: 14px;">
                 ⚠️ <strong>Acción requerida:</strong> Por favor verifica el comprobante de pago y aprueba o rechaza esta compra en el sistema de administración.
               </p>
             </div>
             
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-              <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Este es un mensaje automático de Rifas Mora Motors</p>
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+              <p style="color: #64748b; font-size: 12px; margin: 0;">Este es un mensaje automático de ${BRAND.name}</p>
             </div>
           </div>
         </body>
@@ -192,10 +188,6 @@ Por favor verifica el comprobante de pago y aprueba o rechaza esta compra.
   }
 }
 
-/**
- * Sends a confirmation email to the customer when their purchase is received
- * This lets them know we received their payment proof and will notify them when verified
- */
 export async function sendPurchaseReceivedCustomerEmail(data: PurchaseReceivedCustomerEmailData): Promise<boolean> {
   if (!SENDGRID_API_KEY) {
     console.warn('SENDGRID_API_KEY is not configured. Skipping email notification.')
@@ -219,11 +211,11 @@ export async function sendPurchaseReceivedCustomerEmail(data: PurchaseReceivedCu
 
   const ticketNumbersHtml = ticketNumbers && ticketNumbers.length > 0
     ? `
-      <div style="background-color: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-        <h2 style="color: #2e7d32; margin-top: 0; font-size: 18px;">🎟️ Tus Números de Boletos</h2>
+      <div style="background-color: #e8f0fe; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+        <h2 style="color: #0B2447; margin-top: 0; font-size: 18px;">🎟️ Tus Números de Boletos</h2>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;">
           ${ticketNumbers.map(num => `
-            <span style="background-color: #3498db; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; font-size: 18px;">${num}</span>
+            <span style="background-color: #1976D2; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; font-size: 18px;">${num}</span>
           `).join('')}
         </div>
       </div>
@@ -241,52 +233,52 @@ export async function sendPurchaseReceivedCustomerEmail(data: PurchaseReceivedCu
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f4f8;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(11, 36, 71, 0.1);">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #3498db; margin: 0; font-size: 28px;">📩 ¡Compra Recibida!</h1>
-              <p style="color: #7f8c8d; margin-top: 10px; font-size: 16px;">Hola ${customerName}, hemos recibido tu comprobante de pago</p>
+              <h1 style="color: #1976D2; margin: 0; font-size: 28px;">📩 ¡Compra Recibida!</h1>
+              <p style="color: #64748b; margin-top: 10px; font-size: 16px;">Hola ${customerName}, hemos recibido tu comprobante de pago</p>
             </div>
             
-            <div style="background-color: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-              <p style="margin: 0; color: #1565c0; font-size: 16px;">
+            <div style="background-color: #e8f0fe; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+              <p style="margin: 0; color: #0B2447; font-size: 16px;">
                 🔍 Tu pago está siendo verificado. Te notificaremos por correo electrónico cuando tu compra sea confirmada.
               </p>
             </div>
             
             ${ticketNumbersHtml}
             
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Resumen de tu Compra</h2>
+            <div style="background-color: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #0B2447; margin-top: 0; font-size: 18px; border-bottom: 2px solid #1976D2; padding-bottom: 10px;">Resumen de tu Compra</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d; width: 160px;">Número de Orden:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">#${purchaseId}</td>
+                  <td style="padding: 8px 0; color: #64748b; width: 160px;">Número de Orden:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">#${purchaseId}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Cantidad de Boletos:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${ticketQuantity}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Cantidad de Boletos:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${ticketQuantity}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Monto Total:</td>
+                  <td style="padding: 8px 0; color: #64748b;">Monto Total:</td>
                   <td style="padding: 8px 0; color: #27ae60; font-weight: bold; font-size: 18px;">RD$ ${totalAmount.toLocaleString('es-DO')}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Fecha de Envío:</td>
-                  <td style="padding: 8px 0; color: #2c3e50;">${formattedDate}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Fecha de Envío:</td>
+                  <td style="padding: 8px 0; color: #0B2447;">${formattedDate}</td>
                 </tr>
               </table>
             </div>
             
-            <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #DAA520;">
               <p style="margin: 0; color: #856404; font-size: 14px;">
                 ⏳ <strong>Estado:</strong> Pendiente de verificación. Este proceso puede tomar unos minutos.
               </p>
             </div>
             
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-              <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Gracias por participar en Rifas Mora Motors</p>
-              <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+              <p style="color: #64748b; font-size: 12px; margin: 0;">Gracias por participar en ${BRAND.name}</p>
+              <p style="color: #64748b; font-size: 12px; margin-top: 5px;">
                 ¿Tienes preguntas? Contáctanos por WhatsApp
               </p>
             </div>
@@ -310,7 +302,7 @@ Resumen de tu compra:
 
 Estado: Pendiente de verificación. Este proceso puede tomar unos minutos.
 
-Gracias por participar en Rifas Mora Motors
+Gracias por participar en ${BRAND.name}
     `
   }
 
@@ -324,10 +316,6 @@ Gracias por participar en Rifas Mora Motors
   }
 }
 
-/**
- * Sends an email notification when a payment is approved
- * This notifies the customer that their payment has been verified
- */
 export async function sendPaymentApprovedEmail(data: PaymentApprovedEmailData): Promise<boolean> {
   if (!SENDGRID_API_KEY) {
     console.warn('SENDGRID_API_KEY is not configured. Skipping email notification.')
@@ -345,7 +333,6 @@ export async function sendPaymentApprovedEmail(data: PaymentApprovedEmailData): 
     approvedAt
   } = data
 
-  // If no customer email, we can't send to them
   if (!customerEmail) {
     console.warn('No customer email provided. Cannot send payment approved notification to customer.')
     return false
@@ -362,7 +349,7 @@ export async function sendPaymentApprovedEmail(data: PaymentApprovedEmailData): 
         <h2 style="color: #155724; margin-top: 0; font-size: 18px;">🎉 Tus Números de Boletos</h2>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;">
           ${ticketNumbers.map(num => `
-            <span style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; font-size: 18px;">${num}</span>
+            <span style="background-color: #1976D2; color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; font-size: 18px;">${num}</span>
           `).join('')}
         </div>
       </div>
@@ -380,52 +367,52 @@ export async function sendPaymentApprovedEmail(data: PaymentApprovedEmailData): 
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f4f8;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(11, 36, 71, 0.1);">
             <div style="text-align: center; margin-bottom: 30px;">
               <h1 style="color: #27ae60; margin: 0; font-size: 28px;">✅ ¡Pago Confirmado!</h1>
-              <p style="color: #7f8c8d; margin-top: 10px; font-size: 16px;">Hola ${customerName}, tu pago ha sido verificado exitosamente</p>
+              <p style="color: #64748b; margin-top: 10px; font-size: 16px;">Hola ${customerName}, tu pago ha sido verificado exitosamente</p>
             </div>
             
             ${ticketNumbersHtml}
             
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Detalles de tu Compra</h2>
+            <div style="background-color: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #0B2447; margin-top: 0; font-size: 18px; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Detalles de tu Compra</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d; width: 140px;">Orden ID:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">#${purchaseId}</td>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;">Orden ID:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">#${purchaseId}</td>
                 </tr>
                 ${raffleName ? `
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Rifa:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${raffleName}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Rifa:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${raffleName}</td>
                 </tr>
                 ` : ''}
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Cantidad de Boletos:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${ticketQuantity}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Cantidad de Boletos:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${ticketQuantity}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Monto Pagado:</td>
+                  <td style="padding: 8px 0; color: #64748b;">Monto Pagado:</td>
                   <td style="padding: 8px 0; color: #27ae60; font-weight: bold; font-size: 18px;">RD$ ${totalAmount.toLocaleString('es-DO')}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">Fecha de Aprobación:</td>
-                  <td style="padding: 8px 0; color: #2c3e50;">${formattedDate}</td>
+                  <td style="padding: 8px 0; color: #64748b;">Fecha de Aprobación:</td>
+                  <td style="padding: 8px 0; color: #0B2447;">${formattedDate}</td>
                 </tr>
               </table>
             </div>
             
-            <div style="background-color: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196f3;">
-              <p style="margin: 0; color: #1565c0; font-size: 14px;">
+            <div style="background-color: #e8f0fe; padding: 15px; border-radius: 8px; border-left: 4px solid #1976D2;">
+              <p style="margin: 0; color: #0B2447; font-size: 14px;">
                 🍀 <strong>¡Buena suerte!</strong> Te notificaremos cuando se realice el sorteo.
               </p>
             </div>
             
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-              <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Gracias por participar en Rifas Mora Motors</p>
-              <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+              <p style="color: #64748b; font-size: 12px; margin: 0;">Gracias por participar en ${BRAND.name}</p>
+              <p style="color: #64748b; font-size: 12px; margin-top: 5px;">
                 ¿Tienes preguntas? Contáctanos por WhatsApp
               </p>
             </div>
@@ -451,7 +438,7 @@ ${raffleName ? `- Rifa: ${raffleName}` : ''}
 
 ¡Buena suerte! Te notificaremos cuando se realice el sorteo.
 
-Gracias por participar en Rifas Mora Motors
+Gracias por participar en ${BRAND.name}
     `
   }
 
@@ -465,9 +452,6 @@ Gracias por participar en Rifas Mora Motors
   }
 }
 
-/**
- * Sends a notification to admin when a payment is approved
- */
 export async function sendPaymentApprovedAdminEmail(data: PaymentApprovedEmailData): Promise<boolean> {
   if (!SENDGRID_API_KEY) {
     console.warn('SENDGRID_API_KEY is not configured. Skipping email notification.')
@@ -502,23 +486,23 @@ export async function sendPaymentApprovedAdminEmail(data: PaymentApprovedEmailDa
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f4f8;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 6px rgba(11, 36, 71, 0.1);">
             <div style="text-align: center; margin-bottom: 30px;">
               <h1 style="color: #27ae60; margin: 0; font-size: 24px;">✅ Pago Aprobado</h1>
-              <p style="color: #7f8c8d; margin-top: 10px;">La orden #${purchaseId} ha sido confirmada</p>
+              <p style="color: #64748b; margin-top: 10px;">La orden #${purchaseId} ha sido confirmada</p>
             </div>
             
-            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-              <h2 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Detalles del Cliente</h2>
+            <div style="background-color: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+              <h2 style="color: #0B2447; margin-top: 0; font-size: 18px; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Detalles del Cliente</h2>
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d; width: 140px;">Nombre:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">${customerName}</td>
+                  <td style="padding: 8px 0; color: #64748b; width: 140px;">Nombre:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">${customerName}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; color: #7f8c8d;">WhatsApp:</td>
-                  <td style="padding: 8px 0; color: #2c3e50; font-weight: bold;">
+                  <td style="padding: 8px 0; color: #64748b;">WhatsApp:</td>
+                  <td style="padding: 8px 0; color: #0B2447; font-weight: bold;">
                     <a href="https://wa.me/${customerWhatsapp.replace(/\+/g, '')}" style="color: #25d366; text-decoration: none;">${customerWhatsapp}</a>
                   </td>
                 </tr>
@@ -557,8 +541,8 @@ export async function sendPaymentApprovedAdminEmail(data: PaymentApprovedEmailDa
               </table>
             </div>
             
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-              <p style="color: #7f8c8d; font-size: 12px; margin: 0;">Este es un mensaje automático de Rifas Mora Motors</p>
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+              <p style="color: #64748b; font-size: 12px; margin: 0;">Este es un mensaje automático de ${BRAND.name}</p>
             </div>
           </div>
         </body>

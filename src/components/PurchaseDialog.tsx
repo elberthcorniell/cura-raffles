@@ -196,7 +196,7 @@ export default function PurchaseDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-white">
+          <DialogTitle className="text-2xl font-bold text-foreground">
             Comprar Boletos
           </DialogTitle>
           <DialogDescription>
@@ -245,7 +245,7 @@ export default function PurchaseDialog({
                 </div>
                 <div className="flex justify-between items-center pt-2 border-t border-card-border">
                   <span className="text-lg font-bold">Total</span>
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-2xl font-bold text-foreground">
                     RD${totalPrice.toLocaleString()}
                   </span>
                 </div>

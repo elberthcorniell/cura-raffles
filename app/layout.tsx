@@ -4,14 +4,17 @@ import { ClientProviders } from "./client-providers";
 import "./globals.css";
 
 import 'react-international-phone/style.css'
+
+import { BRAND } from "@/lib/constants";
+
 export const metadata: Metadata = {
   title: {
-    default: "Rifas Mora Motors - Plataforma de Rifas en República Dominicana",
-    template: "%s | Rifas Mora Motors",
+    default: `${BRAND.name} - Plataforma de Rifas en República Dominicana`,
+    template: `%s | ${BRAND.name}`,
   },
   description: "Participa en rifas de productos premium. Plataforma segura y transparente en República Dominicana.",
-  authors: [{ name: "Rifas Mora Motors" }],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://rifasmoramotors.com"),
+  authors: [{ name: BRAND.name }],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || BRAND.url),
 };
 
 export const viewport: Viewport = {
@@ -27,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>
         <Providers>
           <ClientProviders />
@@ -37,4 +40,3 @@ export default function RootLayout({
     </html>
   );
 }
-

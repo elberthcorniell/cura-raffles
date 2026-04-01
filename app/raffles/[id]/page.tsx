@@ -208,13 +208,13 @@ export default function RaffleDetailPage() {
                     <div className="space-y-4">
                       <div className="flex justify-between items-center p-4 bg-background rounded-lg">
                         <span className="text-muted-foreground">Precio por boleto</span>
-                        <span className="font-bold text-xl text-white">
+                        <span className="font-bold text-xl text-foreground">
                           RD${raffle.ticketPrice.toLocaleString()}
                         </span>
                       </div>
                       <div className="flex justify-between items-center p-4 bg-background rounded-lg">
                         <span className="text-muted-foreground">Boletos disponibles</span>
-                        <span className="font-bold text-xl text-white">
+                        <span className="font-bold text-xl text-foreground">
                           {remainingTickets}
                         </span>
                       </div>

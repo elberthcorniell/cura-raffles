@@ -13,34 +13,35 @@ export interface BankAccount {
 }
 
 const enrichedData: Record<string, { bank: string; accountType: string; holderName?: string; cedula?: string }> = {
-  "838198075": {
+  "40099180013": {
+    bank: "Banco BHD",
+    accountType: "Cuenta de ahorros",
+    holderName: "Adilssa Santos",
+  },
+  "836405746": {
     bank: "Banco Popular",
     accountType: "Cuenta corriente",
-    holderName: "Manny Cristobal Mora Peña",
-    cedula: "402-3521285-5",
+    holderName: "Adilssa Santos",
   },
-  "9609044946": {
+  "9607543272": {
     bank: "Banreservas",
-    accountType: "Cuenta de ahorros",
-    holderName: "Manny Cristóbal Mora Peña",
-    cedula: "402-3521285-5",
+    accountType: "Cuenta corriente",
+    holderName: "Adilssa Santos",
   },
-  "25582850030": {
-    bank: "BHD León",
+  "1000612991": {
+    bank: "Qik",
     accountType: "Cuenta de ahorros",
-    holderName: "JHAN SANTANA",
-    cedula: "402-2580124-6",
+    holderName: "Adilssa Santos",
   },
-  "1133-2010022-826": {
-    bank: "Banco Santa Cruz",
+  "https://www.paypal.me/adilssasantos": {
+    bank: "PayPal",
+    accountType: "PayPal",
+    holderName: "Adilssa Santos",
+  },
+  "100100256895": {
+    bank: "Asociación Cibao",
     accountType: "Cuenta de ahorros",
-    holderName: "William José Sánchez",
-    cedula: "402-2544985-5",
-  },
-  "786-960-2794": {
-    bank: "Zelle",
-    accountType: "Zelle",
-    holderName: "Yunior García",
+    holderName: "Adilssa Santos",
   },
 }
 
