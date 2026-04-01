@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { Gestiono } from '@bitnation-dev/management/server'
 import { sendPurchaseSubmittedEmail, sendPurchaseReceivedCustomerEmail } from '@/lib/email'
 
+const DIVISION_ID = 23
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData()
@@ -105,7 +107,7 @@ export async function POST(request: Request) {
       method: 'GET',
       query: {
         status: 'AVAILABLE',
-        divisionId: '830'
+        divisionId: String(DIVISION_ID)
       }
     })
 
@@ -131,7 +133,7 @@ export async function POST(request: Request) {
       type: 'ORDER',
       isSell: true,
       currency: 'DOP',
-      divisionId: 830,
+      divisionId: DIVISION_ID,
       updatePrices: false,
       createFirstInvoice: false,
       generateTaxId: 'none',
